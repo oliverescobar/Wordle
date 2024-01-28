@@ -43,7 +43,6 @@ def wordle():
                             letter_count += 1
                         elif current_word_counts[letter] > sRandWord_counts[letter]:
                             gw.set_square_color(current_row, col, MISSING_COLOR)
-                            gw.set_key_color(letter.upper(), MISSING_COLOR)
                         elif letter in sRandWord:
                             gw.set_square_color(current_row, col, PRESENT_COLOR)
                             gw.set_key_color(letter.upper(), PRESENT_COLOR)
