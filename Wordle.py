@@ -53,8 +53,11 @@ def wordle():
                     if current_word.lower() == sRandWord:
                         gw.show_message(f'Great job! The word was {sRandWord.upper()}')
                     else:
-                        next_row = current_row+1                    
-                        gw.set_current_row(next_row)
+                        next_row = current_row+1  
+                        if next_row == 6:
+                            gw.show_message(f'You have lost. The word was {sRandWord}')
+                        else:
+                            gw.set_current_row(next_row)
                     
                 else:
                     gw.show_message("Not in the word list.")
