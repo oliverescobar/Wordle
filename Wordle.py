@@ -26,6 +26,7 @@ def wordle():
             print(f"Word: {current_word}")
             current_word_counts = Counter(current_word.lower())
             sRandWord_counts = Counter(sRandWord)
+            matched_letter_counts = Counter()
 
             word_length = len(current_word.strip())
             if word_length < 5:
@@ -40,12 +41,11 @@ def wordle():
                         if letter == sRandWord[col]:
                             gw.set_square_color(current_row, col, CORRECT_COLOR)
                             gw.set_key_color(letter.upper(), CORRECT_COLOR)
-                            letter_count += 1
-                        elif current_word_counts[letter] > sRandWord_counts[letter]:
-                            gw.set_square_color(current_row, col, MISSING_COLOR)
-                        elif letter in sRandWord:
+                            matched_letter_counts[letter] += 1
+                        elif letter in sRandWord and matched_letter_counts[letter] < sRandWord_counts[letter]:
                             gw.set_square_color(current_row, col, PRESENT_COLOR)
                             gw.set_key_color(letter.upper(), PRESENT_COLOR)
+                            matched_letter_counts[letter] += 1
                         else: 
                             gw.set_square_color(current_row, col, MISSING_COLOR)
                             gw.set_key_color(letter.upper(), MISSING_COLOR)
