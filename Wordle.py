@@ -20,11 +20,9 @@ def wordle():
         else:
             next_row = 0
             current_word = ""
-            letter_count = 0
             for col in range(N_COLS):
                 current_word += gw.get_square_letter(current_row, col)
             print(f"Word: {current_word}")
-            current_word_counts = Counter(current_word.lower())
             sRandWord_counts = Counter(sRandWord)
             matched_letter_counts = Counter()
 
@@ -48,7 +46,9 @@ def wordle():
                             matched_letter_counts[letter] += 1
                         else: 
                             gw.set_square_color(current_row, col, MISSING_COLOR)
-                            gw.set_key_color(letter.upper(), MISSING_COLOR)
+                            color = gw.get_key_color(letter.upper())
+                            if color != CORRECT_COLOR and color != PRESENT_COLOR:
+                                gw.set_key_color(letter.upper(), MISSING_COLOR)
                         
                     if current_word.lower() == sRandWord:
                         gw.show_message(f'Great job! The word was {sRandWord.upper()}')
